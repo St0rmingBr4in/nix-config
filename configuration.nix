@@ -140,7 +140,18 @@
         };
         plugins = with pkgs.vimPlugins; [ vim-wakatime ale file-line vim-fugitive YouCompleteMe ];
       };
-      alacritty.enable = true;
+      alacritty = {
+        enable = true;
+        settings = {
+          key_bindings = [
+            {
+              key = "Return";
+              mods = "Control|Shift";
+              action = "SpawnNewInstance";
+            }
+          ];
+        };
+      };
     };
   };
 
