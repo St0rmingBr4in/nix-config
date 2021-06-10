@@ -7,8 +7,13 @@
       (import "${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz}/nixos")
     ];
   
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = false;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = false;
+    };
+    kernel.sysctl."kernel.sysrq" = 1;
+  };
 
   networking.hostName = "nixos-test"; # Define your hostname.
   networking.networkmanager.enable = true;
