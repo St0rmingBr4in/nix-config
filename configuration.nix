@@ -4,7 +4,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (import "${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz}/nixos")
     ];
   
   boot = {
@@ -15,25 +14,13 @@
     kernel.sysctl."kernel.sysrq" = 1;
   };
 
-  networking.hostName = "nixos-test"; # Define your hostname.
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos-test"; # Define your hostname.
+    networkmanager.enable = true;
+  }
 
   time.timeZone = "Europe/Paris";
 
-  services.xserver = {
-    enable = true;
-    displayManager.defaultSession = "none+i3";
-    desktopManager.xterm.enable = false;
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        i3status
-        i3lock
-        i3blocks
-      ];
-    };
-  };
-  
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
@@ -41,14 +28,9 @@
     '';
   };
 
-  services.printing.enable = true;
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-  services.xserver.libinput.enable = true;
-
   nixpkgs.config.allowUnfree = true;
-
-  #users.defaultUserShell = pkgs.zsh;
 
   users.users.st0rmingbr4in = {
     shell = pkgs.zsh;
@@ -56,8 +38,6 @@
     extraGroups = [ "wheel" "mlocate" ]; # Enable ‘sudo’ for the user.
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment = {
     systemPackages = with pkgs; [
       wget
@@ -95,88 +75,35 @@
     };
   };
 
-  programs.adb.enable = true;
-  programs.xss-lock.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-  programs.nm-applet.enable = true;
-  home-manager.users.st0rmingbr4in = {
-
-    xsession.windowManager.i3 = {
+  programs = {
+    adb.enable = true;
+    xss-lock.enable = true;
+    gnupg.agent = {
       enable = true;
-      config = {
-        modifier = "Mod4";
-        terminal = "alacritty";
-        menu = "${pkgs.rofi}/bin/rofi -show run";
-      };
+      enableSSHSupport = true;
     };
-
-    programs = {
-      zsh = {
-        enable = true;
-        enableAutosuggestions = true;
-        enableCompletion = true;
-        prezto = {
-          enable = true;
-          syntaxHighlighting.highlighters = [ "main" "brackets" "pattern" "line" "cursor" "root" ];
-        };
-        oh-my-zsh = {
-          enable = true;
-          theme = "bureau";
-          plugins = [ "sudo" "colored-man-pages" "command-not-found" "extract" "docker" "kubectl"  ];
-        };
-      };
-
-      git = {
-        enable = true;
-        userName = "Julien DOCHE";
-        userEmail = "julien.doche@gmail.com";
-      };
-      vim = {
-        enable = true;
-        settings = {
-          mouse = "r";
-        };
-        plugins = with pkgs.vimPlugins; [ vim-wakatime ale file-line vim-fugitive YouCompleteMe ];
-      };
-      alacritty = {
-        enable = true;
-        settings = {
-          key_bindings = [
-            {
-              key = "Return";
-              mods = "Control|Shift";
-              action = "SpawnNewInstance";
-            }
-          ];
-        };
-      };
-    };
+    nm-applet.enable = true;
   };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.locate = {
-    enable = true;
-    locate = pkgs.mlocate;
-    interval = "hourly";
-    localuser = null;
+  services = {
+    xserver.libinput.enable = true;
+    printing.enable = true;
+    openssh.enable = true;
+    locate = {
+      enable = true;
+      locate = pkgs.mlocate;
+      interval = "hourly";
+      localuser = null;
+    };
+    xserver = {
+      enable = true;
+      displayManager.defaultSession = "none+i3";
+      desktopManager.xterm.enable = false;
+      windowManager.i3 = {
+        enable = true;
+      };
+    }
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
-
+  system.stateVersion = "20.09";
 }
