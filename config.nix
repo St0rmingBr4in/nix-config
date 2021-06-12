@@ -17,7 +17,7 @@
   networking = {
     hostName = "nixos-test"; # Define your hostname.
     networkmanager.enable = true;
-  }
+  };
 
   time.timeZone = "Europe/Paris";
 
@@ -102,8 +102,8 @@
       windowManager.i3 = {
         enable = true;
       };
-    }
+    };
   };
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.05";
 }
