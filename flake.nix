@@ -16,21 +16,14 @@
     nixosConfigurations = {
       nixos-test = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./config.nix ];
-      };
-    };
-
-    homeManagerConfigurations = {
-      st0rmingbr4in = homeManager.lib.homeManagerConfiguration {
-        configuration = { pkgs, lib, ... }: {
-          imports = [ ./home.nix ];
-          nixpkgs = {
-            config = { allowUnfree = true; };
-          };
-        };
-        system = "x86_64-linux";
-        homeDirectory = "/home/st0rmingbr4in";
-        username = "st0rmingbr4in";
+        modules = [
+          ./config.nix
+          homeManager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.st0rmingbr4in = import ./home.nix;
+          }
+        ];
       };
     };
   };
