@@ -40,37 +40,7 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      wget
-      slack
-      k9s
-      kubectl
-      ruby
-      python3Minimal
-      firefox
-      google-chrome
-      lynx
-      tree
-      file
-      xsel
-      htop
-      nixfmt
-      home-manager
-      niv
-      thunderbird
-      rofi
-      autorandr
-      arandr
-      android-file-transfer
-
-      # linters
-      #flawfinder
-      cmake-format
-      hadolint
-      #rpmlint
-      vale
-      cpplint
-    ];
+    systemPackages = with pkgs; [];
     variables = {
       EDITOR = "vim";
     };
@@ -78,6 +48,11 @@
 
   programs = {
     adb.enable = true;
+    steam = {
+      enable = true;
+      dedicatedServer.openFirewall = true;
+      remotePlay.openFirewall = true;
+    };
     xss-lock.enable = true;
     gnupg.agent = {
       enable = true;
@@ -87,6 +62,7 @@
   };
 
   services = {
+    chrony.enable = true;
     xserver.libinput.enable = true;
     printing.enable = true;
     openssh.enable = true;
@@ -98,7 +74,10 @@
     };
     xserver = {
       enable = true;
-      displayManager.defaultSession = "none+i3";
+      displayManager = {
+        lightdm.enable = true;
+        defaultSession = "none+i3";
+      };
       desktopManager.xterm.enable = false;
       windowManager.i3 = {
         enable = true;
