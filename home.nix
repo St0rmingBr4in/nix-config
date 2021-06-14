@@ -11,7 +11,21 @@
     };
   };
 
+  services = {
+    cbatticon = {
+      enable = true;
+      commandCriticalLevel = "notify-send \"battery critical!\"";
+    };
+  };
+
+  home.packages = [
+    pkgs.xfce.xfce4-screenshooter
+    pkgs.black
+  ];
+
   programs = {
+    bat.enable = true;
+    keychain.enable = true;
     zsh = {
       enable = true;
       enableAutosuggestions = true;
@@ -31,6 +45,11 @@
       enable = true;
       userName = "Julien DOCHE";
       userEmail = "julien.doche@gmail.com";
+    };
+    ssh = {
+      enable = true;
+      compression = true;
+      matchBlocks."*".user = "j.doche";
     };
     vim = {
       enable = true;

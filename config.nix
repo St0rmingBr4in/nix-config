@@ -5,7 +5,8 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-  
+
+  virtualisation.docker.enable = true;
   boot = {
     loader = {
       systemd-boot.enable = true;
