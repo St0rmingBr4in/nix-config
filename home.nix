@@ -7,7 +7,10 @@
       modifier = "Mod4";
       terminal = "alacritty";
       menu = "${pkgs.rofi}/bin/rofi -show run";
-      # switch between workspaces
+      defaultWorkspace = "workspace number 1";
+      focus.followMouse = false;
+      workspaceAutoBackAndForth = true;
+      workspaceLayout = "tabbed";
     };
   };
 
@@ -29,7 +32,6 @@
     pkgs.git-review
     pkgs.python38Packages.pylint
     pkgs.wget
-    pkgs.bundler
     pkgs.slack
     pkgs.k9s
     pkgs.kubectl
@@ -48,6 +50,7 @@
     pkgs.autorandr
     pkgs.arandr
     pkgs.android-file-transfer
+    pkgs.unzip
 
     # Linters
     pkgs.flawfinder
@@ -86,6 +89,9 @@
       enable = true;
       userName = "Julien DOCHE";
       userEmail = "julien.doche@gmail.com";
+      aliases = {
+        lg = "log --oneline --graph";
+      };
     };
     ssh = {
       enable = true;
@@ -102,6 +108,7 @@
     alacritty = {
       enable = true;
       settings = {
+        scrolling.history = 100000;
         key_bindings = [
           {
             key = "Return";

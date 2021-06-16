@@ -75,7 +75,10 @@
     xserver = {
       enable = true;
       displayManager = {
-        lightdm.enable = true;
+        lightdm = {
+          enable = true;
+          extraConfig = "greeter-hide-users=false";
+        };
         defaultSession = "none+i3";
       };
       desktopManager.xterm.enable = false;
