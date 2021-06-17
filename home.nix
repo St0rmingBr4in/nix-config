@@ -61,6 +61,7 @@
     pkgs.cpplint
 
     pkgs.deluge
+    pkgs.libnotify
   ];
 
   programs = {
