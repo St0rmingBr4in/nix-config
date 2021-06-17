@@ -51,6 +51,7 @@
     pkgs.arandr
     pkgs.android-file-transfer
     pkgs.unzip
+    pkgs.xfce.xfce4-notifyd
 
     # Linters
     pkgs.flawfinder
