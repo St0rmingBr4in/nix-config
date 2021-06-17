@@ -54,10 +54,6 @@
       remotePlay.openFirewall = true;
     };
     xss-lock.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
     nm-applet.enable = true;
   };
 

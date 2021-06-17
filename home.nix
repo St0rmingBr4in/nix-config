@@ -69,7 +69,7 @@
     jq.enable = true;
     keychain = {
       enable = true;
-      keys = [ "id_ed25519" ];
+      keys = [];
     };
     zsh = {
       enable = true;
