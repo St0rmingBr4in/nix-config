@@ -98,7 +98,12 @@
     ssh = {
       enable = true;
       compression = true;
-      matchBlocks."*".user = "j.doche";
+      matchBlocks."*" = {
+        user = "root";
+        extraOptions = {
+          AddKeysToAgent = "yes";
+        };
+      };
     };
     vim = {
       enable = true;
