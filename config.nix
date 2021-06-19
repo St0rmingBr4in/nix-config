@@ -59,7 +59,11 @@
 
   services = {
     chrony.enable = true;
-    xserver.libinput.enable = true;
+    xserver = {
+      libinput.enable = true;
+      layout = "us";
+      xkbVariant = "altgr-intl";
+    };
     printing.enable = true;
     openssh.enable = true;
     locate = {
