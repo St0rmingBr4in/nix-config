@@ -50,6 +50,7 @@
     };
     xss-lock.enable = true;
     nm-applet.enable = true;
+    speedtest-cli.enable = true;
   };
 
   services = {
