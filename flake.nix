@@ -1,10 +1,10 @@
 {
   inputs = rec {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/release-21.05";
+      url = "github:NixOS/nixpkgs/release-22.05";
     };
     homeManager = {
-      url = "github:nix-community/home-manager/release-21.05";
+      url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixosHardware = {
