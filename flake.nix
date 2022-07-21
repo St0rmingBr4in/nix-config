@@ -14,10 +14,23 @@
   
   outputs = { self, nixpkgs, homeManager, nixosHardware }: {
     nixosConfigurations = {
+      media-pc = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./config.nix
+          ./media-pc-hardware-configuration.nix
+          homeManager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.st0rmingbr4in = import ./home.nix;
+          }
+        ];
+      };
       nixos-test = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./config.nix
+          ./hardware-configuration.nix
           homeManager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
