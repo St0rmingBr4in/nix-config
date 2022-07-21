@@ -93,6 +93,7 @@
       userEmail = "julien.doche@gmail.com";
       aliases = {
         lg = "log --oneline --graph";
+        sttaus = "!git status";
       };
     };
     ssh = {
