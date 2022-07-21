@@ -10,7 +10,7 @@
       defaultWorkspace = "workspace number 1";
       focus.followMouse = false;
       workspaceAutoBackAndForth = true;
-      workspaceLayout = "stacked";
+      workspaceLayout = "stacking";
     };
   };
 
