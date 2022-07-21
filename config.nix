@@ -48,6 +48,7 @@
       dedicatedServer.openFirewall = true;
       remotePlay.openFirewall = true;
     };
+    steam-tui.enable = true;
     xss-lock.enable = true;
     nm-applet.enable = true;
     speedtest-cli.enable = true;
