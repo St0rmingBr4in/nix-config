@@ -30,13 +30,13 @@
     pkgs.xfce.xfce4-notifyd
     pkgs.black
     pkgs.git-review
-    pkgs.python38Packages.pylint
+    # pkgs.python38Packages.pylint
     pkgs.wget
     pkgs.slack
     pkgs.k9s
     pkgs.kubectl
     pkgs.ruby
-    pkgs.python3Minimal
+    # pkgs.python3Minimal
     pkgs.firefox
     pkgs.google-chrome
     pkgs.lynx
