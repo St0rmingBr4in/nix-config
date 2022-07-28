@@ -18,8 +18,7 @@
         system = "x86_64-linux";
         modules = [
           ./config.nix
-          ./media-pc.nix
-          ./media-pc-hardware-configuration.nix
+          ./media-pc
           homeManager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

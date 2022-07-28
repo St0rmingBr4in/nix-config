@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   virtualisation.docker.enable = true;
@@ -11,7 +11,7 @@
   };
 
   networking = {
-    hostName = "nixos-test"; # Define your hostname.
+    hostName = lib.mkDefault "nixos-test";
     networkmanager.enable = true;
   };
 
