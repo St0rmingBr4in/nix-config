@@ -1,0 +1,2 @@
+echo setup
+touch setup

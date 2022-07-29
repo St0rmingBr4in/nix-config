@@ -2,8 +2,7 @@
 
 {
   imports = [
-    ./media-pc.nix
-    ./media-pc-hardware-configuration.nix
+    ./default.nix
   ];
 
   networking = {

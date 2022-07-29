@@ -17,7 +17,7 @@
       media-pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./config.nix
+          ./common
           ./media-pc
           homeManager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
@@ -29,8 +29,7 @@
       nixos-test = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./config.nix
-          ./hardware-configuration.nix
+          ./common
           homeManager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -38,6 +37,21 @@
           }
         ];
       };
+    };
+    packages.x86_64-linux.partition-disk =
+      with import nixpkgs { system = "x86_64-linux"; };
+      stdenv.mkDerivation {
+        name = "partition-disk";
+        src = self;
+        baseInputs = [ ansible curl ];
+        buildPhase = "echo done";
+        prePatch = ''export HOME=$NIX_BUILD_TOP'';
+        installPhase = "${curl}/bin/curl -vvvv https://galaxy.ansible.com/api/
+                        ${ansible}/bin/ansible-galaxy collection install davidban77.gns3";
+      };
+    apps.x86_64-linux.partition-disk = {
+      type = "app";
+      program = "${self.packages.x86_64-linux.partition-disk}/bin/ansible-playbook";
     };
   };
 }
