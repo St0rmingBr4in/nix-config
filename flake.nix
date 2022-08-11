@@ -52,12 +52,8 @@
       (pkgs.buildFHSUserEnv {
         name = "ansiblenv";
         targetPkgs = pkgs: with pkgs; [
-            zsh
             (python39.withPackages (p: with p; [ pexpect ansible jmespath ]))
         ];
-        runScript = ''
-          ${pkgs.zsh}/bin/zsh
-        '';
         profile = ''
           export ANSIBLE_COLLECTIONS_PATHS="${ansibleCollectionPath}"
           export SSH_AUTH_SOCK=/run/user/$UID/keyring/ssh
@@ -90,8 +86,10 @@
           export GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt
           export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
         '';
-        installPhase = "${curl}/bin/curl -vvvv https://galaxy.ansible.com/api/
-                        ${ansible}/bin/ansible-galaxy collection install davidban77.gns3";
+        installPhase = ''
+          mkdir -p $out/bin
+          cp ./bootstrap/install.sh $out/bin
+        '';
       };
     apps.x86_64-linux.partition-disk = {
       type = "app";
