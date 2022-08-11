@@ -55,13 +55,13 @@ source "hyperv-iso" "hyperv" {
   enable_secure_boot   = false
   generation           = 1
   headless             = true
-  http_directory       = "vm-bootstrap"
+  http_directory       = "bootstrap"
   iso_checksum         = var.iso_checksum
   iso_url              = var.iso_url
   memory               = var.memory
   shutdown_command     = "sudo shutdown -h now"
   ssh_port             = 22
-  ssh_private_key_file = "./vm-bootstrap/install_rsa"
+  ssh_private_key_file = "./bootstrap/install_rsa"
   ssh_timeout          = "1h"
   ssh_username         = "nixos"
   switch_name          = "Default Switch"
@@ -79,13 +79,13 @@ source "qemu" "qemu" {
   disk_size            = var.disk_size
   format               = "qcow2"
   headless             = true
-  http_directory       = "vm-bootstrap"
+  http_directory       = "bootstrap"
   iso_checksum         = local.iso_checksum
   iso_url              = local.iso_url
   qemuargs             = [["-m", var.memory]]
   shutdown_command     = "sudo shutdown -h now"
   ssh_port             = 22
-  ssh_private_key_file = "./vm-bootstrap/install_ed25519"
+  ssh_private_key_file = "./bootstrap/install_rsa"
   ssh_username         = "nixos"
 }
 
@@ -102,12 +102,12 @@ source "virtualbox-iso" "virtualbox" {
   guest_additions_mode = "disable"
   guest_os_type        = "Linux_64"
   headless             = true
-  http_directory       = "vm-bootstrap"
+  http_directory       = "bootstrap"
   iso_checksum         = local.iso_checksum
   iso_url              = local.iso_url
   shutdown_command     = "sudo shutdown -h now"
   ssh_port             = 22
-  ssh_private_key_file = "./vm-bootstrap/install_rsa"
+  ssh_private_key_file = "./bootstrap/install_rsa"
   ssh_username         = "nixos"
   vboxmanage           = [["modifyvm", "{{ .Name }}", "--memory", var.memory, "--vram", "128", "--clipboard", "bidirectional"]]
 }
@@ -123,13 +123,13 @@ source "vmware-iso" "vmware" {
   disk_size            = var.disk_size
   guest_os_type        = "Linux"
   headless             = true
-  http_directory       = "vm-bootstrap"
+  http_directory       = "bootstrap"
   iso_checksum         = local.iso_checksum
   iso_url              = local.iso_url
   memory               = var.memory
   shutdown_command     = "sudo shutdown -h now"
   ssh_port             = 22
-  ssh_private_key_file = "./vm-bootstrap/install_rsa"
+  ssh_private_key_file = "./bootstrap/install_rsa"
   ssh_username         = "nixos"
 }
 
@@ -141,9 +141,19 @@ build {
     "source.vmware-iso.vmware"
   ]
 
+  provisioner "file" {
+    source = "bootstrap"
+    destination = "/tmp/bootstrap"
+  }
+
   provisioner "shell" {
     execute_command = "sudo su -c '{{ .Vars }} {{ .Path }}'"
-    script          = "./vm-bootstrap/install.sh"
+    script          = "nix --extra-experimental-features nix-command --extra-experimental-features flakes run file:///tmp/bootstrap#nixos-install"
+  }
+
+  provisioner "shell" {
+    execute_command = "sudo su -c '{{ .Vars }} {{ .Path }}'"
+    script          = "./bootstrap/post-install.sh"
   }
 
   post-processor "vagrant" {

@@ -3,7 +3,7 @@
 packer_http=$(cat .packer_http)
 
 # Initial formatting using Ansible
-nix --extra-experimental-features nix-command --extra-experimental-features flakes run github:St0rmingBr4in/nix-config/master#partition-disk
+ansible-playbook
 
 # Setup system
 nixos-generate-config --root /mnt

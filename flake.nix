@@ -51,7 +51,7 @@
       };
     apps.x86_64-linux.partition-disk = {
       type = "app";
-      program = "${self.packages.x86_64-linux.partition-disk}/bin/ansible-playbook";
+      program = "${self.packages.x86_64-linux.partition-disk}/bin/install.sh";
     };
   };
 }
