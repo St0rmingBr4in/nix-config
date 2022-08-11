@@ -45,7 +45,7 @@
         src = self;
         baseInputs = [ ansible curl ];
         buildPhase = "echo done";
-        prePatch = ''export HOME=$NIX_BUILD_TOP'';
+        prePatch = ''export HOME=$NIX_BUILD_TOP''; # Needed for ansible to work
         installPhase = "${curl}/bin/curl -vvvv https://galaxy.ansible.com/api/
                         ${ansible}/bin/ansible-galaxy collection install davidban77.gns3";
       };
