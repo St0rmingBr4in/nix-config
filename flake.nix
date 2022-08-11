@@ -67,12 +67,30 @@
       }).env;
     packages.x86_64-linux.partition-disk =
       with import nixpkgs { system = "x86_64-linux"; };
+      let
+          ansibleCollectionPath = pkgs.callPackage ./ansible-collections.nix {} pkgs.ansible {
+              "containers-podman" = {
+                  version = "1.9.3";
+                  sha256 = "sha256:1vjsm7696fp9av7708h05zjjdil7gwcqiv6mrz7vzmnnwdnqshp7";
+              };
+          };
+      in
       stdenv.mkDerivation {
         name = "partition-disk";
         src = self;
+        targetPkgs = pkgs: with pkgs; [
+            zsh
+            (python39.withPackages (p: with p; [ pexpect ansible jmespath ]))
+        ];
         baseInputs = [ ansible curl ];
         buildPhase = "echo done";
         prePatch = ''export HOME=$NIX_BUILD_TOP''; # Needed for ansible to work
+        profile = ''
+          export ANSIBLE_COLLECTIONS_PATHS="${ansibleCollectionPath}"
+          export SSH_AUTH_SOCK=/run/user/$UID/keyring/ssh
+          export GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt
+          export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+        '';
         installPhase = "${curl}/bin/curl -vvvv https://galaxy.ansible.com/api/
                         ${ansible}/bin/ansible-galaxy collection install davidban77.gns3";
       };
