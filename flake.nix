@@ -78,11 +78,10 @@
       stdenv.mkDerivation {
         name = "partition-disk";
         src = self;
-        targetPkgs = pkgs: with pkgs; [
-            zsh
-            (python39.withPackages (p: with p; [ pexpect ansible jmespath ]))
+        baseInputs = [
+          ansible
+          (python39.withPackages (p: with p; [ pexpect ansible jmespath ]))
         ];
-        baseInputs = [ ansible curl ];
         buildPhase = "echo done";
         prePatch = ''export HOME=$NIX_BUILD_TOP''; # Needed for ansible to work
         profile = ''
