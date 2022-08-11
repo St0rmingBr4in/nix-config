@@ -47,17 +47,17 @@ index 9e3a3a7..97572a3 100644
 Commit and push
 
 ```
-sudo nixos-install --flake "github:St0rmingBr4in/nix-config/master#${NIXOS_SYSTEM_CONFIG_NAME}" --no-write-lock-file
+sudo nixos-install --refresh --flake "github:St0rmingBr4in/nix-config/master#${NIXOS_SYSTEM_CONFIG_NAME}" --no-write-lock-file
 ```
 
 # Update an existing system
 
 ```
-sudo nixos-rebuild boot --flake "github:St0rmingBr4in/nix-config/master#${NIXOS_SYSTEM_CONFIG_NAME}" --no-write-lock-file
+sudo nixos-rebuild boot --refresh --flake "github:St0rmingBr4in/nix-config/master#${NIXOS_SYSTEM_CONFIG_NAME}" --no-write-lock-file
 ```
 
 # To test locally
 
 ```
-docker run -it -v $(pwd):/nix-config --workdir="/nix-config" --platform linux/amd64 nixos/nix nix build --extra-experimental-features flakes --extra-experimental-features nix-command .#nixosConfigurations.media-pc.config.system.build.toplevel
+docker run -it -v $(pwd):/nix-config --workdir="/nix-config" --platform linux/amd64 nixos/nix nix build --refresh --extra-experimental-features flakes --extra-experimental-features nix-command .#nixosConfigurations.media-pc.config.system.build.toplevel
 ```
