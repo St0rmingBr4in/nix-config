@@ -52,6 +52,7 @@
       (pkgs.buildFHSUserEnv {
         name = "ansiblenv";
         targetPkgs = pkgs: with pkgs; [
+            ansible
             (python39.withPackages (p: with p; [ pexpect ansible jmespath ]))
         ];
         profile = ''
