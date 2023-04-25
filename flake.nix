@@ -1,10 +1,10 @@
 {
   inputs = rec {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/release-22.05";
+      url = "github:NixOS/nixpkgs/release-22.11";
     };
     homeManager = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixosHardware = {
@@ -31,6 +31,18 @@
         modules = [
           ./common
           ./media-pc
+          homeManager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.st0rmingbr4in = import ./home.nix;
+          }
+        ];
+      };
+      powerhouse = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./config.nix
+          ./powerhouse
           homeManager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
