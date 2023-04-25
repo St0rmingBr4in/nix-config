@@ -17,6 +17,21 @@
 
   time.timeZone = "Europe/Paris";
 
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "fr_FR.UTF-8";
+    LC_IDENTIFICATION = "fr_FR.UTF-8";
+    LC_MEASUREMENT = "fr_FR.UTF-8";
+    LC_MONETARY = "fr_FR.UTF-8";
+    LC_NAME = "fr_FR.UTF-8";
+    LC_NUMERIC = "fr_FR.UTF-8";
+    LC_PAPER = "fr_FR.UTF-8";
+    LC_TELEPHONE = "fr_FR.UTF-8";
+    LC_TIME = "fr_FR.UTF-8";
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   sound.enable = true;
@@ -24,9 +39,10 @@
   nixpkgs.config.allowUnfree = true;
 
   users.users.st0rmingbr4in = {
+    description = "Julien DOCHE";
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "mlocate" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "mlocate" "networkmanager" "wheel" ];
   };
 
   environment = {
@@ -53,16 +69,6 @@
       libinput.enable = true;
       layout = "us";
       xkbVariant = "altgr-intl";
-    };
-    printing.enable = true;
-    openssh.enable = true;
-    locate = {
-      enable = true;
-      locate = pkgs.mlocate;
-      interval = "hourly";
-      localuser = null;
-    };
-    xserver = {
       enable = true;
       displayManager = {
         lightdm = {
@@ -76,7 +82,15 @@
         enable = true;
       };
     };
+    printing.enable = true;
+    openssh.enable = true;
+    locate = {
+      enable = true;
+      locate = pkgs.mlocate;
+      interval = "hourly";
+      localuser = null;
+    };
   };
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "22.11";
 }
