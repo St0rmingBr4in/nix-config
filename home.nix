@@ -38,7 +38,7 @@
       pkgs.kubectl
       pkgs.ruby
       # pkgs.python3Minimal
-      pkgs.firefox
+      # pkgs.firefox
       pkgs.google-chrome
       pkgs.lynx
       pkgs.tree
