@@ -5,7 +5,7 @@
   boot = {
     loader = {
       systemd-boot.enable = true;
-      efi.canTouchEfiVariables = false;
+      # efi.canTouchEfiVariables = true;
     };
     kernel.sysctl."kernel.sysrq" = 1;
   };
