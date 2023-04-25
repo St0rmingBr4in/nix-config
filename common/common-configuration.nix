@@ -17,12 +17,7 @@
 
   time.timeZone = "Europe/Paris";
 
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
