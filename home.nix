@@ -25,44 +25,47 @@
     };
   };
 
-  home.packages = [
-    pkgs.xfce.xfce4-screenshooter
-    pkgs.xfce.xfce4-notifyd
-    pkgs.black
-    pkgs.git-review
-    # pkgs.python38Packages.pylint
-    pkgs.wget
-    pkgs.slack
-    pkgs.k9s
-    pkgs.kubectl
-    pkgs.ruby
-    # pkgs.python3Minimal
-    pkgs.firefox
-    pkgs.google-chrome
-    pkgs.lynx
-    pkgs.tree
-    pkgs.file
-    pkgs.xsel
-    pkgs.htop
-    pkgs.nixfmt
-    pkgs.thunderbird
-    pkgs.rofi
-    pkgs.autorandr
-    pkgs.arandr
-    pkgs.android-file-transfer
-    pkgs.unzip
-    pkgs.xfce.xfce4-notifyd
+  home = {
+    packages = [
+      pkgs.xfce.xfce4-screenshooter
+      pkgs.xfce.xfce4-notifyd
+      pkgs.black
+      pkgs.git-review
+      # pkgs.python38Packages.pylint
+      pkgs.wget
+      pkgs.slack
+      pkgs.k9s
+      pkgs.kubectl
+      pkgs.ruby
+      # pkgs.python3Minimal
+      pkgs.firefox
+      pkgs.google-chrome
+      pkgs.lynx
+      pkgs.tree
+      pkgs.file
+      pkgs.xsel
+      pkgs.htop
+      pkgs.nixfmt
+      pkgs.thunderbird
+      pkgs.rofi
+      pkgs.autorandr
+      pkgs.arandr
+      pkgs.android-file-transfer
+      pkgs.unzip
+      pkgs.xfce.xfce4-notifyd
 
-    # Linters
-    pkgs.flawfinder
-    pkgs.cmake-format
-    pkgs.hadolint
-    pkgs.vale
-    pkgs.cpplint
+      # Linters
+      pkgs.flawfinder
+      pkgs.cmake-format
+      pkgs.hadolint
+      pkgs.vale
+      pkgs.cpplint
 
-    pkgs.deluge
-    pkgs.libnotify
-  ];
+      pkgs.deluge
+      pkgs.libnotify
+    ];
+    stateVersion = "22.11";
+  };
 
   programs = {
     bat.enable = true;
