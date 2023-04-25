@@ -41,7 +41,6 @@
       powerhouse = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./config.nix
           ./powerhouse
           homeManager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
