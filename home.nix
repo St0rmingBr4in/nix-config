@@ -11,6 +11,9 @@
       focus.followMouse = false;
       workspaceAutoBackAndForth = true;
       workspaceLayout = "stacking";
+      keybindings = {
+        "Mod1+Tab" = "workspace back_and_forth";
+      }
     };
   };
 
@@ -42,6 +45,7 @@
       pkgs.google-chrome
       pkgs.lynx
       pkgs.tree
+      pkgs.nixfmt
       pkgs.file
       pkgs.xsel
       pkgs.htop
