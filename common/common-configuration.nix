@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ system, config, pkgs, lib, ... }:
 
 {
   virtualisation.docker.enable = true;
@@ -46,7 +46,6 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [];
     variables = {
       EDITOR = "vim";
     };

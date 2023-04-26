@@ -3,6 +3,8 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/release-22.11";
     };
+    alejandra.url = "github:kamadorueda/alejandra/3.0.0";
+    alejandra.inputs.nixpkgs.follows = "nixpkgs";
     homeManager = {
       url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,7 +14,7 @@
     };
   };
   
-  outputs = { self, nixpkgs, homeManager, nixosHardware }: {
+  outputs = { self, alejandra, nixpkgs, homeManager, nixosHardware, ... }: {
     nixosConfigurations = {
       k3s-6 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -38,9 +40,12 @@
           }
         ];
       };
-      powerhouse = nixpkgs.lib.nixosSystem {
+      powerhouse = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
+          {
+            environment.systemPackages = [alejandra.defaultPackage.${system}];
+          }
           ./common/common-configuration.nix
           ./powerhouse
           homeManager.nixosModules.home-manager {

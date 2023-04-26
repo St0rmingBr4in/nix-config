@@ -11,20 +11,20 @@
       focus.followMouse = false;
       workspaceAutoBackAndForth = true;
       workspaceLayout = "stacking";
-      keybindings = {
-        "Mod1+Tab" = "workspace back_and_forth";
-      };
+      keybindings = { "Mod1+Tab" = "workspace back_and_forth"; };
     };
   };
 
   services = {
     cbatticon = {
       enable = true;
-      commandCriticalLevel = "notify-send \"battery critical!\"";
+      commandCriticalLevel = ''notify-send "battery critical!"'';
     };
     gpg-agent = {
       enable = true;
-      enableSshSupport = true;
+      enableSshSupport = true
+
+      ;
     };
   };
 
@@ -46,6 +46,7 @@
       pkgs.lynx
       pkgs.tree
       pkgs.nixfmt
+      pkgs.gnumake
       pkgs.file
       pkgs.xsel
       pkgs.htop
@@ -77,7 +78,7 @@
     jq.enable = true;
     keychain = {
       enable = true;
-      keys = [];
+      keys = [ ];
     };
     zsh = {
       enable = true;
@@ -85,12 +86,20 @@
       enableCompletion = true;
       prezto = {
         enable = true;
-        syntaxHighlighting.highlighters = [ "main" "brackets" "pattern" "line" "cursor" "root" ];
+        syntaxHighlighting.highlighters =
+          [ "main" "brackets" "pattern" "line" "cursor" "root" ];
       };
       oh-my-zsh = {
         enable = true;
         theme = "bureau";
-        plugins = [ "sudo" "colored-man-pages" "command-not-found" "extract" "docker" "kubectl"  ];
+        plugins = [
+          "sudo"
+          "colored-man-pages"
+          "command-not-found"
+          "extract"
+          "docker"
+          "kubectl"
+        ];
       };
     };
 
@@ -108,29 +117,28 @@
       compression = true;
       matchBlocks."*" = {
         user = "root";
-        extraOptions = {
-          AddKeysToAgent = "yes";
-        };
+        extraOptions = { AddKeysToAgent = "yes"; };
       };
     };
     vim = {
       enable = true;
-      settings = {
-        mouse = "r";
-      };
-      plugins = with pkgs.vimPlugins; [ vim-wakatime ale file-line vim-fugitive ];
+      settings = { mouse = "r"; };
+      plugins = with pkgs.vimPlugins; [
+        vim-wakatime
+        ale
+        file-line
+        vim-fugitive
+      ];
     };
     alacritty = {
       enable = true;
       settings = {
         scrolling.history = 100000;
-        key_bindings = [
-          {
-            key = "Return";
-            mods = "Control|Shift";
-            action = "SpawnNewInstance";
-          }
-        ];
+        key_bindings = [{
+          key = "Return";
+          mods = "Control|Shift";
+          action = "SpawnNewInstance";
+        }];
       };
     };
   };
