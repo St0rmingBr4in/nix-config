@@ -105,10 +105,6 @@
         ];
       };
     };
-    neovim = {
-      enable = true;
-    };
-
     git = {
       enable = true;
       userName = "Julien DOCHE";
@@ -136,6 +132,21 @@
         vim-fugitive
       ];
     };
+    neovim = {
+      enable = true;
+      vimAlias = true;
+      plugins = with pkgs.vimPlugins; [
+        vim-wakatime
+        file-line
+        vim-fugitive
+        yankring
+        vim-nix
+        { plugin = ale;
+         config = "let g:ale_fixers.python = ['black']";
+        }
+     ];
+    };
+
     alacritty = {
       enable = true;
       settings = {
