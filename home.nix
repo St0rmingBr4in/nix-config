@@ -136,7 +136,6 @@
       enable = true;
       vimAlias = true;
       plugins = with pkgs.vimPlugins; [
-        vim-wakatime
         file-line
         vim-fugitive
         yankring
