@@ -29,9 +29,7 @@
   };
 
   home = {
-    sessionVariables = {
-      EDITOR = "vim";
-    };
+    sessionVariables = { EDITOR = "vim"; };
     packages = [
       pkgs.xfce.xfce4-screenshooter
       pkgs.xfce.xfce4-notifyd
@@ -140,10 +138,15 @@
         vim-fugitive
         yankring
         vim-nix
-        { plugin = ale;
-         config = "let g:ale_fixers.python = ['black']";
+        {
+          plugin = ale;
+          config = ''
+            let g:ale_fixers = {}
+            let g:ale_fixers.python = ['black']
+            let g:ale_fixers.nix = ['nixfmt']
+          '';
         }
-     ];
+      ];
     };
 
     alacritty = {
