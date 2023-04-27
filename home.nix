@@ -29,6 +29,9 @@
   };
 
   home = {
+    sessionVariables = {
+      EDITOR = "vim";
+    };
     packages = [
       pkgs.xfce.xfce4-screenshooter
       pkgs.xfce.xfce4-notifyd
@@ -101,6 +104,9 @@
           "kubectl"
         ];
       };
+    };
+    neovim = {
+      enable = true;
     };
 
     git = {

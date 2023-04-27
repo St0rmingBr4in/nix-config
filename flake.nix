@@ -1,19 +1,15 @@
 {
   inputs = rec {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs/release-22.11";
-    };
+    nixpkgs = { url = "github:NixOS/nixpkgs/release-22.11"; };
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
     homeManager = {
       url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixosHardware = {
-      url = "github:NixOS/nixos-hardware";
-    };
+    nixosHardware = { url = "github:NixOS/nixos-hardware"; };
   };
-  
+
   outputs = { self, alejandra, nixpkgs, homeManager, nixosHardware, ... }: {
     nixosConfigurations = {
       k3s-6 = nixpkgs.lib.nixosSystem {
@@ -21,7 +17,8 @@
         modules = [
           ./tmp
           ./k3s-6
-          homeManager.nixosModules.home-manager {
+          homeManager.nixosModules.home-manager
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.st0rmingbr4in = import ./home-tmp.nix;
@@ -33,7 +30,8 @@
         modules = [
           ./common
           ./media-pc
-          homeManager.nixosModules.home-manager {
+          homeManager.nixosModules.home-manager
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.st0rmingbr4in = import ./home.nix;
@@ -44,11 +42,12 @@
         system = "x86_64-linux";
         modules = [
           {
-            environment.systemPackages = [alejandra.defaultPackage.${system}];
+            environment.systemPackages = [ alejandra.defaultPackage.${system} ];
           }
           ./common/common-configuration.nix
           ./powerhouse
-          homeManager.nixosModules.home-manager {
+          homeManager.nixosModules.home-manager
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.st0rmingbr4in = import ./home.nix;
@@ -59,7 +58,8 @@
         system = "x86_64-linux";
         modules = [
           ./common
-          homeManager.nixosModules.home-manager {
+          homeManager.nixosModules.home-manager
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.st0rmingbr4in = import ./home.nix;
@@ -70,20 +70,22 @@
     devShells.x86_64-linux.default =
       with import nixpkgs { system = "x86_64-linux"; };
       let
-          ansibleCollectionPath = pkgs.callPackage ./ansible-collections.nix {} pkgs.ansible {
-              "containers-podman" = {
-                  version = "1.9.3";
-                  sha256 = "sha256:1vjsm7696fp9av7708h05zjjdil7gwcqiv6mrz7vzmnnwdnqshp7";
-              };
+        ansibleCollectionPath =
+          pkgs.callPackage ./ansible-collections.nix { } pkgs.ansible {
+            "containers-podman" = {
+              version = "1.9.3";
+              sha256 =
+                "sha256:1vjsm7696fp9av7708h05zjjdil7gwcqiv6mrz7vzmnnwdnqshp7";
+            };
           };
-      in
-      # we make an fhs to make easier portable playbook execution, which assumes #!/bin/sh for script commands
-      (pkgs.buildFHSUserEnv {
+        # we make an fhs to make easier portable playbook execution, which assumes #!/bin/sh for script commands
+      in (pkgs.buildFHSUserEnv {
         name = "ansiblenv";
-        targetPkgs = pkgs: with pkgs; [
+        targetPkgs = pkgs:
+          with pkgs; [
             ansible
             (python39.withPackages (p: with p; [ pexpect ansible jmespath ]))
-        ];
+          ];
         profile = ''
           export ANSIBLE_COLLECTIONS_PATHS="${ansibleCollectionPath}"
           export SSH_AUTH_SOCK=/run/user/$UID/keyring/ssh
@@ -94,14 +96,15 @@
     packages.x86_64-linux.partition-disk =
       with import nixpkgs { system = "x86_64-linux"; };
       let
-          ansibleCollectionPath = pkgs.callPackage ./ansible-collections.nix {} pkgs.ansible {
-              "containers-podman" = {
-                  version = "1.9.3";
-                  sha256 = "sha256:1vjsm7696fp9av7708h05zjjdil7gwcqiv6mrz7vzmnnwdnqshp7";
-              };
+        ansibleCollectionPath =
+          pkgs.callPackage ./ansible-collections.nix { } pkgs.ansible {
+            "containers-podman" = {
+              version = "1.9.3";
+              sha256 =
+                "sha256:1vjsm7696fp9av7708h05zjjdil7gwcqiv6mrz7vzmnnwdnqshp7";
+            };
           };
-      in
-      stdenv.mkDerivation {
+      in stdenv.mkDerivation {
         name = "partition-disk";
         src = self;
         baseInputs = [
@@ -109,7 +112,7 @@
           (python39.withPackages (p: with p; [ pexpect ansible jmespath ]))
         ];
         buildPhase = "echo done";
-        prePatch = ''export HOME=$NIX_BUILD_TOP''; # Needed for ansible to work
+        prePatch = "export HOME=$NIX_BUILD_TOP"; # Needed for ansible to work
         profile = ''
           export ANSIBLE_COLLECTIONS_PATHS="${ansibleCollectionPath}"
           export SSH_AUTH_SOCK=/run/user/$UID/keyring/ssh
