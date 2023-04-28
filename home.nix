@@ -11,7 +11,7 @@
       focus.followMouse = false;
       workspaceAutoBackAndForth = true;
       workspaceLayout = "stacking";
-      keybindings = { "Mod1+Tab" = "workspace back_and_forth"; };
+      # keybindings = { "Mod1+Tab" = "workspace back_and_forth"; };
     };
   };
 
