@@ -51,7 +51,6 @@
       pkgs.nixfmt
       pkgs.thunderbird
       pkgs.rofi
-      pkgs.autorandr
       pkgs.arandr
       pkgs.android-file-transfer
       pkgs.unzip
@@ -72,6 +71,7 @@
   };
 
   programs = {
+    autorandr.enable = true;
     bat.enable = true;
     fzf.enable = true;
     jq.enable = true;
