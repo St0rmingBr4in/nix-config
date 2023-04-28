@@ -29,12 +29,12 @@ let
   collection = name: { version, sha256 }:
     stdenv.mkDerivation {
       pname = name;
-      version = version;
+      inherit version;
 
       src = builtins.fetchurl {
-        name = name;
+        inherit name;
         url = "https://galaxy.ansible.com/download/${name}-${version}.tar.gz";
-        sha256 = sha256;
+        inherit sha256;
       };
 
       phases = [ "installPhase" ];

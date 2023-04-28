@@ -35,14 +35,11 @@
       pkgs.xfce.xfce4-notifyd
       pkgs.black
       pkgs.git-review
-      # pkgs.python38Packages.pylint
       pkgs.wget
       pkgs.slack
       pkgs.k9s
       pkgs.kubectl
       pkgs.ruby
-      # pkgs.python3Minimal
-      # pkgs.firefox
       pkgs.google-chrome
       pkgs.lynx
       pkgs.tree
@@ -66,6 +63,7 @@
       pkgs.hadolint
       pkgs.vale
       pkgs.cpplint
+      pkgs.statix
 
       pkgs.deluge
       pkgs.libnotify
@@ -133,6 +131,17 @@
     neovim = {
       enable = true;
       vimAlias = true;
+      extraConfig = ''
+        set mouse=r
+        function! s:DiffWithSaved()
+          let filetype=&ft
+          diffthis
+          vnew | r # | normal! 1Gdd
+          diffthis
+          exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+        endfunction
+        com! DiffSaved call s:DiffWithSaved()
+      '';
       plugins = with pkgs.vimPlugins; [
         file-line
         vim-fugitive

@@ -11,6 +11,9 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   networking.hostName = "powerhouse"; # Define your hostname.
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
