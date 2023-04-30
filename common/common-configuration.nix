@@ -4,7 +4,12 @@
   virtualisation.docker.enable = true;
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 20;
+        consoleMode = "max";
+      };
+      timeout = 15;
       # efi.canTouchEfiVariables = true;
     };
     kernel.sysctl."kernel.sysrq" = 1;
