@@ -70,6 +70,7 @@
   };
 
   services = {
+    autorandr.enable = true;
     chrony.enable = true;
     xserver = {
       libinput.enable = true;
