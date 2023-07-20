@@ -1,17 +1,21 @@
 { config, pkgs, ... }:
 
 {
-  xsession.windowManager.i3 = {
+  xsession = {
     enable = true;
-    config = {
-      modifier = "Mod4";
-      terminal = "alacritty";
-      menu = "${pkgs.rofi}/bin/rofi -show run";
-      defaultWorkspace = "workspace number 1";
-      focus.followMouse = false;
-      workspaceAutoBackAndForth = true;
-      workspaceLayout = "stacking";
-      # keybindings = { "Mod1+Tab" = "workspace back_and_forth"; };
+    initExtra = "autorandr -c default";
+    windowManager.i3 = {
+      enable = true;
+      config = {
+        modifier = "Mod4";
+        terminal = "alacritty";
+        menu = "${pkgs.rofi}/bin/rofi -show run";
+        defaultWorkspace = "workspace number 1";
+        focus.followMouse = false;
+        workspaceAutoBackAndForth = true;
+        workspaceLayout = "stacking";
+        # keybindings = { "Mod1+Tab" = "workspace back_and_forth"; };
+      };
     };
   };
 
