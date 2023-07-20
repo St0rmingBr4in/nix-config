@@ -45,7 +45,7 @@
 
   users.users.st0rmingbr4in = {
     description = "Julien DOCHE";
-    # shell = pkgs.zsh;
+    shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "mlocate" "networkmanager" "wheel" ];
   };
@@ -66,6 +66,7 @@
     };
     xss-lock.enable = true;
     nm-applet.enable = true;
+    zsh.enable = true;
   };
 
   services = {
