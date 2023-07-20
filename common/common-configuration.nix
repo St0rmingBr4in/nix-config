@@ -51,7 +51,7 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [cryptsetup];
+    systemPackages = with pkgs; [cryptsetup glances];
     variables = {
       EDITOR = "vim";
     };
