@@ -17,7 +17,10 @@
 
   networking = {
     hostName = lib.mkDefault "nixos-test";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      dns = "systemd-resolved";
+    };
   };
 
   time.timeZone = "Europe/Paris";
@@ -51,7 +54,7 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [cryptsetup glances sops];
+    systemPackages = with pkgs; [cryptsetup glances sops bind];
     variables = {
       EDITOR = "vim";
     };
