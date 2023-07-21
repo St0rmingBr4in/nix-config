@@ -73,6 +73,7 @@
   programs = {
     autorandr.enable = true;
     bat.enable = true;
+    feh.enable = true;
     fzf.enable = true;
     jq.enable = true;
     keychain = {
