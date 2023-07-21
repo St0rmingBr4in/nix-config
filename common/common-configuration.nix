@@ -51,7 +51,7 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [cryptsetup glances];
+    systemPackages = with pkgs; [cryptsetup glances sops];
     variables = {
       EDITOR = "vim";
     };
@@ -64,6 +64,7 @@
       dedicatedServer.openFirewall = true;
       remotePlay.openFirewall = true;
     };
+    gnupg.agent.enable = true;
     xss-lock.enable = true;
     nm-applet.enable = true;
     zsh.enable = true;
