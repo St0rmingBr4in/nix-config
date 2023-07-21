@@ -1,10 +1,10 @@
 {
   inputs = rec {
-    nixpkgs = { url = "github:NixOS/nixpkgs/release-22.11"; };
+    nixpkgs = { url = "github:NixOS/nixpkgs/release-23.05"; };
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
     homeManager = {
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixosHardware = { url = "github:NixOS/nixos-hardware"; };
