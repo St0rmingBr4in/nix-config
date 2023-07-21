@@ -17,6 +17,7 @@
 
   networking = {
     hostName = lib.mkDefault "nixos-test";
+    nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
@@ -76,6 +77,23 @@
   services = {
     autorandr.enable = true;
     chrony.enable = true;
+    locate = {
+      enable = true;
+      locate = pkgs.mlocate;
+      interval = "hourly";
+      localuser = null;
+    };
+    openssh.enable = true;
+    printing.enable = true;
+    resolved = {
+      enable = true;
+      dnssec = "true";
+      domains = [ "~." ];
+      fallbackDns = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
+      extraConfig = ''
+        DNSOverTLS=yes
+      '';
+    };
     xserver = {
       libinput.enable = true;
       layout = "us";
@@ -92,14 +110,6 @@
       windowManager.i3 = {
         enable = true;
       };
-    };
-    printing.enable = true;
-    openssh.enable = true;
-    locate = {
-      enable = true;
-      locate = pkgs.mlocate;
-      interval = "hourly";
-      localuser = null;
     };
   };
 
