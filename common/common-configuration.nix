@@ -55,7 +55,13 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [cryptsetup glances sops bind];
+    systemPackages = with pkgs; [
+      bind
+      cryptsetup
+      fluxcd
+      glances
+      sops
+    ];
     variables = {
       EDITOR = "vim";
     };
