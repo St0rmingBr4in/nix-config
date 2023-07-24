@@ -33,6 +33,9 @@
   };
 
   home = {
+    shellAliases = {
+      "cat" = "bat";
+    };
     sessionVariables = { EDITOR = "vim"; };
     packages = [
       pkgs.xfce.xfce4-screenshooter
@@ -70,6 +73,11 @@
 
       pkgs.deluge
       pkgs.libnotify
+      pkgs.bind
+      pkgs.cryptsetup
+      pkgs.fluxcd
+      pkgs.glances
+      pkgs.sops
     ];
     stateVersion = "22.11";
   };
