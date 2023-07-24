@@ -17,7 +17,7 @@
 
   networking = {
     hostName = lib.mkDefault "nixos-test";
-    nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
+    # nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
@@ -97,7 +97,7 @@
       domains = [ "~." ];
       fallbackDns = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
       extraConfig = ''
-        DNSOverTLS=yes
+        DNSOverTLS=opportunistic
       '';
     };
     xserver = {
