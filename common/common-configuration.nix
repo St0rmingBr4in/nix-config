@@ -95,6 +95,8 @@
     };
     xserver = {
       libinput.enable = true;
+      autoRepeatDelay = 300;
+      autoRepeatInterval = 30;
       layout = "us";
       xkbVariant = "altgr-intl";
       enable = true;

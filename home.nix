@@ -78,6 +78,11 @@
       pkgs.fluxcd
       pkgs.glances
       pkgs.sops
+      pkgs.iperf
+
+      pkgs.discord
+      pkgs.spotify
+      pkgs.pavucontrol
     ];
     stateVersion = "22.11";
   };
