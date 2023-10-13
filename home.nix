@@ -91,6 +91,8 @@
       pkgs.parted
       pkgs.python3Minimal
       pkgs.efibootmgr
+
+      pkgs.gimp
     ];
     stateVersion = "22.11";
   };
