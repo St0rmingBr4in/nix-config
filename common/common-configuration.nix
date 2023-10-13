@@ -10,7 +10,10 @@
         consoleMode = "max";
       };
       timeout = 15;
-      # efi.canTouchEfiVariables = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
     };
     kernel.sysctl."kernel.sysrq" = 1;
   };
@@ -74,6 +77,10 @@
   };
 
   services = {
+    openiscsi = {
+      enable = true;
+      name = "test";
+    };
     autorandr.enable = true;
     chrony.enable = true;
     locate = {
@@ -83,7 +90,15 @@
       localuser = null;
     };
     openssh.enable = true;
+
     printing.enable = true;
+
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
+
     resolved = {
       enable = true;
       dnssec = "true";

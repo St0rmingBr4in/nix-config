@@ -20,6 +20,10 @@
   };
 
   services = {
+    polybar = {
+      enable = true;
+      script = "polybar bar &";
+    };
     cbatticon = {
       enable = true;
       commandCriticalLevel = ''notify-send "battery critical!"'';
@@ -83,6 +87,10 @@
       pkgs.discord
       pkgs.spotify
       pkgs.pavucontrol
+      pkgs.nfs-utils
+      pkgs.parted
+      pkgs.python3Minimal
+      pkgs.efibootmgr
     ];
     stateVersion = "22.11";
   };
