@@ -93,6 +93,7 @@
       pkgs.efibootmgr
 
       pkgs.gimp
+      pkgs.crane
     ];
     stateVersion = "22.11";
   };
@@ -111,14 +112,14 @@
       enable = true;
       enableAutosuggestions = true;
       enableCompletion = true;
-      prezto = {
-        enable = true;
-        syntaxHighlighting.highlighters =
-          [ "main" "brackets" "pattern" "line" "cursor" "root" ];
-      };
+      #prezto = {
+      #  enable = true;
+      #  syntaxHighlighting.highlighters =
+      #    [ "main" "brackets" "pattern" "line" "cursor" "root" ];
+      #};
       oh-my-zsh = {
         enable = true;
-        theme = "bureau";
+        theme = "sorin";
         plugins = [
           "sudo"
           "colored-man-pages"
