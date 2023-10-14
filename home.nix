@@ -94,6 +94,8 @@
 
       pkgs.gimp
       pkgs.crane
+      pkgs.kubernetes-helm
+      pkgs.prismlauncher
     ];
     stateVersion = "22.11";
   };
