@@ -96,6 +96,13 @@
       pkgs.crane
       pkgs.kubernetes-helm
       pkgs.prismlauncher
+      pkgs.smartmontools
+      pkgs.nodePackages.cdk8s-cli
+      pkgs.nodePackages.npm
+      pkgs.pipenv
+      pkgs.nodejs
+      pkgs.kustomize
+      pkgs.openssl
     ];
     stateVersion = "22.11";
   };
